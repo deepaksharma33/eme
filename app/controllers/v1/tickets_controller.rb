@@ -8,7 +8,9 @@ module V1
       @tickets = Ticket.includes({ excavator: :company }, :datetime, :service_area, :dig_site_info).page(params[:page])
     end
 
-    def show; end
+    def show
+      @ticket = Ticket.find(params[:id])
+    end
 
     def create
       build_associations
