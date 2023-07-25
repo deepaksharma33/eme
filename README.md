@@ -1,24 +1,20 @@
-# README
+# EME - Excavation Made Easy
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- Application specific infos:
 
-Things you may want to cover:
+* Ruby version - `3.0.0`
 
-* Ruby version
+* Rails version - `7.0.6`
 
-* System dependencies
+* PostgreSQL version - `13`
 
-* Configuration
+* How to run the test suite? - `bundle exec rspec`
 
-* Database creation
+* Deployed at - https://eme.fly.dev/
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ticket creation endpoint - 
+    ** URL    - https://eme.fly.dev/v1/tickets
+    ** Action - POST
+    ** Params - JSON similar to the Sample JSON shared
+    ** Success Response - `{ "message": "Ticket created successfully", "status": "ok" }`
+    ** Failure Response - `{ "message": <Error message>, "status": "bad_request" }`
