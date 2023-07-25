@@ -7,16 +7,25 @@
         <th>Request Number</th>
         <th>Sequence Number</th>
         <th>Request Type</th>
+        <th>Excavator Co.</th>
+        <th>Excavator Co. Address</th>
+        <th>Primary SA Code</th>
+        <th>Additional SA Code</th>
         <th>Action</th>
       </tr>
     </thead>
     <tbody>
       <% @tickets.each do |ticket| %>
+
         <tr>
-          <td><%= ticket[:id] %></td>
-          <td><%= ticket[:request_number] %></td>
+          <td><%= ticket.id %></td>
+          <td><%= ticket.request_number %></td>
           <td><%= ticket.sequence_number %></td>
           <td><%= ticket.request_type %></td>
+          <td><%= ticket.excavator.company.name %></td>
+          <td><%= format_address(ticket) %></td>
+          <td><%= ticket.service_area.primary_service_area_code %></td>
+          <td><%= format_asa_codes(ticket.service_area.additional_service_area_codes) %></td>
           <td><%= link_to 'View', v1_ticket_path(ticket) %></td>
         </tr>
       <% end %>

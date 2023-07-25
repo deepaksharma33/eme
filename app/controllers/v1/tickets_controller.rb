@@ -5,7 +5,7 @@ module V1
     skip_before_action :verify_authenticity_token
 
     def index
-      @tickets = Ticket.page(params[:page])
+      @tickets = Ticket.includes({ excavator: :company }, :datetime, :service_area, :dig_site_info).page(params[:page])
     end
 
     def show; end
@@ -38,7 +38,7 @@ module V1
 
     def company
       info = params[:excavator]
-      @company ||= Company.new(name: info[:name],
+      @company ||= Company.new(name: info[:company_name],
                                address: info[:address],
                                city: info[:city],
                                state: info[:state],
@@ -47,7 +47,7 @@ module V1
     end
 
     def excavator
-      @excavator ||= Excavator.new(ticket: ticket)
+      @excavator ||= Excavator.new(crew_onsite: params[:excavator][:crew_onsite])
     end
 
     def datetime
@@ -56,8 +56,8 @@ module V1
 
     def service_area
       @service_area ||= ServiceArea.new(
-        primary_service_area_code: params[:service_area][:primary_service_area_code],
-        additional_service_area_codes: params[:service_area][:additional_service_area_codes]
+        primary_service_area_code: params[:service_area][:primary_service_area_code][:sa_code],
+        additional_service_area_codes: params[:service_area][:additional_service_area_codes][:sa_code].to_s
       )
     end
 
