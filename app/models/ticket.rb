@@ -1,5 +1,5 @@
 class Ticket < ApplicationRecord
-  paginates_per 25
+  paginates_per 2
 
   has_one :excavator
   has_one :datetime

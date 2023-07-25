@@ -5,7 +5,6 @@ module V1
     skip_before_action :verify_authenticity_token
 
     def index
-      # debugger
       @tickets = Ticket.page(params[:page])
     end
 

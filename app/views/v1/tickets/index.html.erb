@@ -1,4 +1,5 @@
 
+<% if @tickets.present? %>
   <table class="tickets-container">
     <thead>
       <tr>
@@ -22,3 +23,6 @@
     </tbody>
   </table>
   <%= paginate @tickets %>
+<% else %>
+  <h1>There is no ticket data.</h1>
+<% end %>

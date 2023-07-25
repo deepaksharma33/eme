@@ -1,9 +1,0 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  primary_service_area_codes: MyText
-  additional_service_area_codes: MyText
-
-two:
-  primary_service_area_codes: MyText
-  additional_service_area_codes: MyText
