@@ -9,7 +9,7 @@ module TicketHelper
   end
 
   def site_image_url(ticket)
-    url = "https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&zoom=8.8809&geometry=polygon:#{polygon_coords(ticket)};linewidth:5;linecolor:%23ff6600;linestyle:dashed;fillcolor:%236600ff;lineopacity:1;fillopacity:0.8&apiKey=f09af66f3a264fddbb604f5b1b0de705"
+    url = "https://maps.geoapify.com/v1/staticmap?style=osm-carto&width=600&height=400&zoom=8.8809&geometry=polygon:#{polygon_coords(ticket)};linewidth:5;linecolor:%23ff6600;linestyle:dashed;fillcolor:%236600ff;lineopacity:1;fillopacity:0.8&apiKey=#{ENV["GEOAPIFY_SECRET_KEY"]}"
 
     url
   end
