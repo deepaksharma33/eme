@@ -1,0 +1,24 @@
+
+  <table class="tickets-container">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Request Number</th>
+        <th>Sequence Number</th>
+        <th>Request Type</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tickets.each do |ticket| %>
+        <tr>
+          <td><%= ticket[:id] %></td>
+          <td><%= ticket[:request_number] %></td>
+          <td><%= ticket.sequence_number %></td>
+          <td><%= ticket.request_type %></td>
+          <td><%= link_to 'View', v1_ticket_path(ticket) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= paginate @tickets %>
