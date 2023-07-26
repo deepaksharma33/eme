@@ -15,6 +15,6 @@
 * Ticket creation endpoint - 
     * URL    - **https://eme.fly.dev/v1/tickets**
     * Action - **POST**
-    * Params - JSON similar to the Sample JSON shared
+    * Params - JSON similar to the [Sample JSON](https://github.com/deepaksharma33/eme/blob/master/sample.json) shared
     * Success Response - `{ "message": "Ticket created successfully", "status": "ok" }`
     * Failure Response - `{ "message": <Error message>, "status": "bad_request" }`
