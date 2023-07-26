@@ -15,7 +15,7 @@ module V1
     def create
       build_associations
 
-      render json: { message: 'Ticket created successfully', status: :ok } if ticket.save!
+      render json: { message: "Ticket created successfully", status: :ok } if ticket.save!
     end
 
     private

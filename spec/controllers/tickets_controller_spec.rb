@@ -33,4 +33,18 @@ describe V1::TicketsController, type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  describe "POST /tickets" do
+    before do
+      sample_json = FactoryBot.create(:api_sample_json).marshal_dump.to_json
+      json_data = JSON.parse(sample_json)["json"]
+
+      post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
+    end
+
+    it "responds with 200 status code and success message" do
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["message"]).to eq("Ticket created successfully")
+    end
+  end
 end
