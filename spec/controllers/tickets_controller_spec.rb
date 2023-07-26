@@ -35,16 +35,31 @@ describe V1::TicketsController, type: :request do
   end
 
   describe "POST /tickets" do
-    before do
-      sample_json = FactoryBot.create(:api_sample_json).marshal_dump.to_json
-      json_data = JSON.parse(sample_json)["json"]
+    let(:sample_json) { FactoryBot.create(:api_sample_json).marshal_dump.to_json }
+    let(:json_data)   { JSON.parse(sample_json)["json"] }
 
-      post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
+    context "when data gets created successfully" do
+      before do
+        post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
+      end
+
+      it "responds with 200 status code and success message" do
+        expect(response).to have_http_status(:ok)
+        expect(JSON.parse(response.body)["message"]).to eq("Ticket created successfully")
+      end
     end
 
-    it "responds with 200 status code and success message" do
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)["message"]).to eq("Ticket created successfully")
+    context "when error occurs" do
+      before do
+        allow(DigSiteInfo).to receive(:new).and_return(nil)
+
+        post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
+      end
+
+      it "responds with bad_request and error message" do
+        response_body = JSON.parse(response.body)
+        expect(response_body["status"]).to eq("bad_request")
+      end
     end
   end
 end
