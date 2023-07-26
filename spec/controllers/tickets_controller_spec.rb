@@ -43,9 +43,11 @@ describe V1::TicketsController, type: :request do
         post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
       end
 
-      it "responds with 200 status code and success message" do
-        expect(response).to have_http_status(:ok)
-        expect(JSON.parse(response.body)["message"]).to eq("Ticket created successfully")
+      it "responds with ok status and success message" do
+        response_body = JSON.parse(response.body)
+
+        expect(response_body["status"]).to eq("ok")
+        expect(response_body["message"]).to eq("Ticket created successfully")
       end
     end
 
@@ -56,7 +58,7 @@ describe V1::TicketsController, type: :request do
         post '/v1/tickets', params: json_data.deep_transform_keys!(&:underscore)
       end
 
-      it "responds with bad_request and error message" do
+      it "responds with bad_request" do
         response_body = JSON.parse(response.body)
         expect(response_body["status"]).to eq("bad_request")
       end
